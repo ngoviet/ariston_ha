@@ -1,0 +1,94 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Ariston NET",
+        "description": "Sign in with your Ariston NET account (the same one you use in the app).",
+        "data": {
+          "username": "Email",
+          "password": "Password"
+        }
+      },
+      "device": {
+        "title": "Choose heater",
+        "data": {
+          "gw": "Water heater"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Wrong email or password.",
+      "cannot_connect": "Could not reach the Ariston cloud.",
+      "no_med_device": "This account has no supported Velis heater (wheType 3)."
+    },
+    "abort": {
+      "already_configured": "This heater is already set up."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Options",
+        "data": {
+          "scan_interval": "State poll interval (seconds)"
+        }
+      }
+    }
+  },
+  "entity": {
+    "water_heater": {
+      "water_heater": { "name": "Water heater" }
+    },
+    "switch": {
+      "power": { "name": "Power" },
+      "eco": { "name": "ECO" },
+      "anti_legionella": { "name": "Anti-legionella" }
+    },
+    "select": {
+      "auto_power_off": { "name": "Auto power-off" }
+    },
+    "number": {
+      "max_setpoint_temperature": { "name": "Maximum temperature" }
+    },
+    "binary_sensor": {
+      "is_heating": { "name": "Heating" },
+      "anti_legionella_cycle": { "name": "Anti-legionella cycle" }
+    },
+    "sensor": {
+      "proc_req_temp": { "name": "Requested temperature" },
+      "average_showers": { "name": "Average showers" },
+      "remaining_time": { "name": "Remaining time" },
+      "errors_count": { "name": "Error count" },
+      "energy_total": { "name": "Total energy (cloud)" },
+      "energy_today": { "name": "Energy today (cloud)" },
+      "time_program": { "name": "Weekly program" },
+      "plant_mode": { "name": "Plant mode (raw)" }
+    }
+  },
+  "services": {
+    "set_time_program": {
+      "name": "Set weekly program",
+      "description": "Overwrite the weekly hot-water program (only effective while the heater is in PROGRAM mode).",
+      "fields": {
+        "config_entry_id": {
+          "name": "Heater",
+          "description": "Pick one when several heaters are set up."
+        },
+        "plans": {
+          "name": "Plans",
+          "description": "List of plans; each day (0=Sunday…6=Saturday) may appear in only one plan."
+        }
+      }
+    },
+    "refresh_time_program": {
+      "name": "Refresh weekly program",
+      "description": "Re-read the program and settings from the cloud.",
+      "fields": {
+        "config_entry_id": {
+          "name": "Heater",
+          "description": "Pick one when several heaters are set up."
+        }
+      }
+    }
+  }
+}

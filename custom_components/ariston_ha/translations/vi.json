@@ -1,0 +1,94 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Ariston NET",
+        "description": "Đăng nhập tài khoản Ariston NET (cùng tài khoản dùng trên app).",
+        "data": {
+          "username": "Email",
+          "password": "Mật khẩu"
+        }
+      },
+      "device": {
+        "title": "Chọn bình",
+        "data": {
+          "gw": "Bình nóng lạnh"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "Sai email hoặc mật khẩu.",
+      "cannot_connect": "Không kết nối được cloud Ariston.",
+      "no_med_device": "Tài khoản không có bình Velis loại hỗ trợ (wheType 3)."
+    },
+    "abort": {
+      "already_configured": "Bình này đã được thêm."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Tuỳ chọn",
+        "data": {
+          "scan_interval": "Chu kỳ đọc trạng thái (giây)"
+        }
+      }
+    }
+  },
+  "entity": {
+    "water_heater": {
+      "water_heater": { "name": "Bình nóng lạnh" }
+    },
+    "switch": {
+      "power": { "name": "Nguồn" },
+      "eco": { "name": "ECO" },
+      "anti_legionella": { "name": "Diệt khuẩn" }
+    },
+    "select": {
+      "auto_power_off": { "name": "Hẹn giờ tắt" }
+    },
+    "number": {
+      "max_setpoint_temperature": { "name": "Nhiệt độ tối đa" }
+    },
+    "binary_sensor": {
+      "is_heating": { "name": "Đang đun" },
+      "anti_legionella_cycle": { "name": "Chu kỳ diệt khuẩn" }
+    },
+    "sensor": {
+      "proc_req_temp": { "name": "Nhiệt độ yêu cầu" },
+      "average_showers": { "name": "Số lượt tắm" },
+      "remaining_time": { "name": "Thời gian còn lại" },
+      "errors_count": { "name": "Số lỗi" },
+      "energy_total": { "name": "Điện năng tích luỹ (cloud)" },
+      "energy_today": { "name": "Điện năng hôm nay (cloud)" },
+      "time_program": { "name": "Lịch tuần" },
+      "plant_mode": { "name": "Chế độ (thô)" }
+    }
+  },
+  "services": {
+    "set_time_program": {
+      "name": "Đặt lịch tuần",
+      "description": "Ghi đè lịch hâm nước hằng tuần (chỉ tác dụng khi bình ở chế độ PROGRAM).",
+      "fields": {
+        "config_entry_id": {
+          "name": "Bình",
+          "description": "Chọn khi có nhiều bình."
+        },
+        "plans": {
+          "name": "Lịch",
+          "description": "Danh sách plan; mỗi ngày (0=Chủ nhật…6=Thứ bảy) chỉ nằm trong một plan."
+        }
+      }
+    },
+    "refresh_time_program": {
+      "name": "Làm mới lịch tuần",
+      "description": "Đọc lại lịch và cài đặt từ cloud.",
+      "fields": {
+        "config_entry_id": {
+          "name": "Bình",
+          "description": "Chọn khi có nhiều bình."
+        }
+      }
+    }
+  }
+}

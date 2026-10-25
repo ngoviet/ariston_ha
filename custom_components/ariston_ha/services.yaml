@@ -1,0 +1,24 @@
+set_time_program:
+  fields:
+    config_entry_id:
+      required: false
+      selector:
+        config_entry:
+          integration: ariston_ha
+    plans:
+      required: true
+      example: >-
+        - days: [1, 2, 3, 4, 5]
+          shws: [{time: "06:00", temp: 60}]
+        - days: [6, 0]
+          shws: [{time: "08:00", temp: 65}]
+      selector:
+        object:
+
+refresh_time_program:
+  fields:
+    config_entry_id:
+      required: false
+      selector:
+        config_entry:
+          integration: ariston_ha
