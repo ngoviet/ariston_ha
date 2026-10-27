@@ -170,4 +170,4 @@ pytest -q
 
 ## Giấy phép
 
-MIT © Ngô Đức Việt. Không liên kết hay được Ariston bảo trợ.
+[MIT](LICENSE) © Ngô Đức Việt. Không liên kết hay được Ariston bảo trợ.

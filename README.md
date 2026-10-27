@@ -172,4 +172,4 @@ pytest -q
 
 ## License
 
-MIT © Ngô Đức Việt. Not affiliated with or endorsed by Ariston.
+[MIT](LICENSE) © Ngô Đức Việt. Not affiliated with or endorsed by Ariston.
