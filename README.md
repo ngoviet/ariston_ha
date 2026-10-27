@@ -1,5 +1,7 @@
 # Ariston NET for Home Assistant
 
+<!-- readme-axi type=ha -->
+
 [![HACS Custom](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://hacs.xyz/docs/faq/custom_repositories/)
 [![GitHub release](https://img.shields.io/github/v/release/ngoviet/ariston_ha)](https://github.com/ngoviet/ariston_ha/releases)
 [![Validate](https://github.com/ngoviet/ariston_ha/actions/workflows/validate.yml/badge.svg)](https://github.com/ngoviet/ariston_ha/actions/workflows/validate.yml)
@@ -8,14 +10,31 @@
 
 **English** · [Tiếng Việt](README.vi.md)
 
-[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=ngoviet&repository=ariston_ha&category=integration)
-
 A **Home Assistant custom integration** to control and monitor an **Ariston electric water
 heater** of the **Velis "Med"** family — **Slim3 Top Wi-Fi**, and likely Lydos / Velis Evo —
 through the **Ariston NET cloud**. Installs via **HACS**, sets up from the UI, and covers
 everything the official Ariston NET app offers for this model in **one device**: temperature,
 MANUAL / PROGRAM mode, power, ECO, anti-legionella, the auto power-off timer, and the weekly
 schedule.
+
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=ngoviet&repository=ariston_ha&category=integration)
+
+> 🇻🇳 Built and maintained by one person in Việt Nam — if it saves you time, please
+> [support the project](#support-the-project).
+
+## Contents
+
+- [Features](#features)
+- [Supported devices](#supported-devices)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Entities](#entities)
+- [Services](#services)
+- [Troubleshooting](#troubleshooting)
+- [How it works](#how-it-works)
+- [Development](#development)
+
+## Features
 
 - **Water heater** — current / target temperature, `MANUAL` / `PROGRAM` mode, on/off.
 - **Switches** — power, ECO, anti-legionella.
@@ -29,27 +48,13 @@ schedule.
 - UI setup (config flow), re-login on token expiry, options (poll interval), diagnostics,
   English and Vietnamese UI.
 
-> Built for and tested on **Ariston Slim3 Top Wi-Fi** (`sys=4` VELIS, `wheType=3`,
-> `wheModelType=32`). Other Velis "Med" heaters (Evo, Lydos family) share the same API and
-> are likely to work, but are untested here. Requires **Home Assistant 2026.9** or newer.
+## Supported devices
 
-> **Why cloud and not local?** The heater's Wi-Fi module talks to AWS IoT over **mutual TLS**
-> (it validates the server's CA chain and presents its own client certificate), opens **no
-> local API**, and keeps its private key in encrypted flash. Capturing the Wi-Fi traffic or
-> spoofing the cloud is therefore not viable; the only fully-local path is a hardware UART
-> tap inside the unit. This integration uses the same cloud API as the official app.
+Built for and tested on **Ariston Slim3 Top Wi-Fi** (`sys=4` VELIS, `wheType=3`,
+`wheModelType=32`). Other Velis "Med" heaters (Evo, Lydos family) share the same API and are
+likely to work, but are untested here. Requires **Home Assistant 2026.9** or newer.
 
-## Contents
-
-- [1. Install](#1-install)
-- [2. Add the integration](#2-add-the-integration)
-- [Entities](#entities)
-- [Weekly program](#weekly-program)
-- [Notes & limitations](#notes--limitations)
-- [Removal](#removal)
-- [Development](#development)
-
-## 1. Install
+## Installation
 
 **HACS (one click):** click the button and confirm — it opens *Custom repositories* on your
 own Home Assistant pre-filled for this repo.
@@ -62,7 +67,9 @@ own Home Assistant pre-filled for this repo.
 **Manual:** copy `custom_components/ariston_ha/` into your HA `config/custom_components/`
 folder and restart HA.
 
-## 2. Add the integration
+**Removal:** *Settings → Devices & Services → Ariston NET → ⋮ → Delete*.
+
+## Configuration
 
 *Settings → Devices & Services → Add Integration → **Ariston NET***. Enter the **same email
 and password** you use in the Ariston NET app. If the account has more than one supported
@@ -86,16 +93,16 @@ integration's *Options* (default 60 s; settings, schedule and energy are read ev
 | Requested temperature | `sensor` | What the heater is working toward |
 | Average showers | `sensor` | App's "available showers" estimate |
 | Remaining time | `sensor` | Minutes to the setpoint |
-| Error count | `sensor` | Bus errors (may be unavailable, see notes) |
+| Error count | `sensor` | Bus errors (may be unavailable, see Troubleshooting) |
 | Total energy (cloud) | `sensor` | Cloud figure, reference only |
 | Energy today (cloud) | `sensor` | Cloud figure, reference only |
 | Weekly program | `sensor` | Showers/week; `schedule` & `plans` attributes |
 | Plant mode (raw) | `sensor` | Diagnostic: raw mode + flags |
 
-## Weekly program
+## Services
 
-The schedule only takes effect while the water heater is in **PROGRAM** mode. Overwrite it
-with the `ariston_ha.set_time_program` service:
+The weekly schedule only takes effect while the water heater is in **PROGRAM** mode.
+Overwrite it with `ariston_ha.set_time_program`:
 
 ```yaml
 action: ariston_ha.set_time_program
@@ -110,7 +117,7 @@ data:
 Each day may appear in only one plan (the service rejects duplicates). Use
 `ariston_ha.refresh_time_program` to re-read the schedule and settings from the cloud.
 
-## Notes & limitations
+## Troubleshooting
 
 - **Cloud only** — needs internet and the Ariston cloud to be up; there is no local control.
 - **Writes are confirmed by read-back** — after each command the integration waits a few
@@ -120,10 +127,17 @@ Each day may appear in only one plan (the service rejects duplicates). Use
 - **Error count can be unavailable** — the cloud `busErrors` endpoint has been returning
   HTTP 500; the sensor is then `unavailable` rather than guessing.
 - **Boost is intentionally not offered** — the app hides it for this model.
+- When reporting an issue, attach the integration's **diagnostics** (*Devices & Services →
+  Ariston NET → ⋮ → Download diagnostics*).
 
-## Removal
+## How it works
 
-*Settings → Devices & Services → Ariston NET → ⋮ → Delete*.
+The heater's Wi-Fi module talks to AWS IoT over **mutual TLS** (it validates the server's CA
+chain and presents its own client certificate), opens **no local API**, and keeps its private
+key in encrypted flash. Capturing the Wi-Fi traffic or spoofing the cloud is therefore not
+viable; the only fully-local path is a hardware UART tap inside the unit. This integration
+uses the same cloud API as the official app; the register/body details were derived from the
+Ariston NET app and verified against the real heater.
 
 ## Development
 
@@ -134,11 +148,6 @@ Slim3. Run them with:
 pip install -r requirements_test.txt
 pytest -q
 ```
-
-The register/body details were derived from the Ariston NET app and verified against the
-real heater. This project is not affiliated with or endorsed by Ariston.
-
----
 
 <!-- support:start -->
 ## Support the project
@@ -157,5 +166,10 @@ real heater. This project is not affiliated with or endorsed by Ariston.
   <img src="https://raw.githubusercontent.com/ngoviet/.github/main/assets/support/vietqr-card.svg" width="300" alt="VietQR — MB Bank — NGO DUC VIET — 911051212">
 </p>
 
-<p align="center"><sub>🇻🇳 VietQR: quét bằng app ngân hàng bất kỳ, nội dung <code>Ung ho ariston_ha</code>. Cảm ơn bạn! · Thank you for keeping this project alive.</sub></p>
+<p align="center"><sub>🇻🇳 VietQR: scan with any Vietnamese banking app, transfer note <code>Ung ho ariston_ha</code>. Thank you for keeping this project alive!</sub></p>
+<p align="center"><sub>Crypto (BEP20 network): <code>0x57f07d44fb581cddc028a0c67d63a8cc05aa6caa</code> · USDT · USDC · BNB · ETH · BTC</sub></p>
 <!-- support:end -->
+
+## License
+
+MIT © Ngô Đức Việt. Not affiliated with or endorsed by Ariston.
