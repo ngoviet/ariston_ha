@@ -8,9 +8,13 @@
 
 [English](README.md) · **Tiếng Việt**
 
-Điều khiển và theo dõi **bình nóng lạnh Ariston** dòng **Velis "Med"** (ví dụ **Slim3 Top
-Wi-Fi**) từ Home Assistant qua **cloud Ariston NET**. Một integration gộp mọi chức năng app
-chính chủ có cho dòng này, trong một thiết bị.
+[![Mở Home Assistant của bạn và mở một kho trong Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=ngoviet&repository=ariston_ha&category=integration)
+
+**Integration tuỳ chỉnh cho Home Assistant** để điều khiển và theo dõi **bình nóng lạnh
+Ariston** dòng **Velis "Med"** — **Slim3 Top Wi-Fi**, và nhiều khả năng cả Lydos / Velis Evo —
+qua **cloud Ariston NET**. Cài qua **HACS**, thiết lập từ giao diện, gộp mọi chức năng app
+chính chủ có cho dòng này trong **một thiết bị**: nhiệt độ, chế độ MANUAL / PROGRAM, nguồn,
+ECO, diệt khuẩn, hẹn giờ tắt và lịch tuần.
 
 - **Bình nóng lạnh** — nhiệt độ hiện tại/đặt, chế độ `MANUAL` / `PROGRAM`, bật/tắt.
 - **Công tắc** — nguồn, ECO, diệt khuẩn.
@@ -46,7 +50,12 @@ chính chủ có cho dòng này, trong một thiết bị.
 
 ## 1. Cài đặt
 
-**HACS (kho tuỳ chỉnh):** HACS → ⋮ → *Custom repositories* → thêm
+**HACS (một chạm):** bấm nút rồi xác nhận — nó mở *Custom repositories* trên chính Home
+Assistant của bạn, đã điền sẵn kho này.
+
+[![Mở Home Assistant của bạn và mở một kho trong Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=ngoviet&repository=ariston_ha&category=integration)
+
+**HACS (thủ công):** HACS → ⋮ → *Custom repositories* → thêm
 `https://github.com/ngoviet/ariston_ha`, loại *Integration* → cài → khởi động lại HA.
 
 **Thủ công:** chép `custom_components/ariston_ha/` vào thư mục `config/custom_components/` của

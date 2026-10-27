@@ -8,9 +8,14 @@
 
 **English** · [Tiếng Việt](README.vi.md)
 
-Control and monitor an **Ariston electric water heater** of the **Velis "Med"** family
-(e.g. **Slim3 Top Wi-Fi**) from Home Assistant through the **Ariston NET cloud**. One
-integration covers everything the official app offers for this model, in one device.
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=ngoviet&repository=ariston_ha&category=integration)
+
+A **Home Assistant custom integration** to control and monitor an **Ariston electric water
+heater** of the **Velis "Med"** family — **Slim3 Top Wi-Fi**, and likely Lydos / Velis Evo —
+through the **Ariston NET cloud**. Installs via **HACS**, sets up from the UI, and covers
+everything the official Ariston NET app offers for this model in **one device**: temperature,
+MANUAL / PROGRAM mode, power, ECO, anti-legionella, the auto power-off timer, and the weekly
+schedule.
 
 - **Water heater** — current / target temperature, `MANUAL` / `PROGRAM` mode, on/off.
 - **Switches** — power, ECO, anti-legionella.
@@ -46,7 +51,12 @@ integration covers everything the official app offers for this model, in one dev
 
 ## 1. Install
 
-**HACS (custom repository):** HACS → ⋮ → *Custom repositories* → add
+**HACS (one click):** click the button and confirm — it opens *Custom repositories* on your
+own Home Assistant pre-filled for this repo.
+
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=ngoviet&repository=ariston_ha&category=integration)
+
+**HACS (manual):** HACS → ⋮ → *Custom repositories* → add
 `https://github.com/ngoviet/ariston_ha`, category *Integration* → install → restart HA.
 
 **Manual:** copy `custom_components/ariston_ha/` into your HA `config/custom_components/`
