@@ -102,6 +102,8 @@ async def test_setup_creates_entities(hass: HomeAssistant, cloud):
     assert wh.attributes["current_temperature"] == 43.0
     assert wh.attributes["temperature"] == 80.0
     assert wh.attributes["max_temp"] == 80.0
+    # bước 1 °C: thanh trượt / nút −/+ của frontend không gửi được 55,5 lên cloud
+    assert wh.attributes["target_temp_step"] == 1.0
     assert wh.attributes["operation_list"] == ["MANUAL", "PROGRAM"]
     assert wh.attributes["operation_mode"] == "MANUAL"
 
