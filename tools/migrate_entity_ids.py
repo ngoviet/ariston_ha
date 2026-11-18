@@ -6,7 +6,7 @@ Chạy SAU KHI đã xoá hai config entry cũ (`ariston`, `ariston_slim3`) để
     python tools/migrate_entity_ids.py           # chạy thử: chỉ in kế hoạch
     python tools/migrate_entity_ids.py --apply    # đổi thật
 
-Cần `.env` có HA_URL (vd http://192.168.10.15:8123) và HA_TOKEN (long-lived token).
+Cần `.env` có HA_URL (vd http://192.168.12.20:8123) và HA_TOKEN (long-lived token).
 
 ⚠ Tiền tố id cũ là tên device khi cài: bình tên "Tầng 3" → slug `tang_3`. Nếu bình anh tên khác,
 sửa PREFIX bên dưới (hoặc đối chiếu bảng in ra trước khi --apply).
